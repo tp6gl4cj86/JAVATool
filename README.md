@@ -12,6 +12,7 @@ Add dependency.
 
 ```
 dependencies {
-    compile 'tw.com.tp6gl4cj86:javatool:2017.01.06.1'
+    compile 'tw.com.tp6gl4cj86:javatool:2017.01.09.2'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 ```
