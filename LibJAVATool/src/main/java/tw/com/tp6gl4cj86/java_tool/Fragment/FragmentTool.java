@@ -12,63 +12,68 @@ import tw.com.tp6gl4cj86.java_tool.Tool.JAVATool;
 public class FragmentTool
 {
 
-    public static <FM, F> void addFragmentAddToBackStack(FM fragmentManager, int layout, F fragment)
+    public static enum Method
+    {
+        ADD, REPLACE
+    }
+
+    public static <FM, F> void addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment)
     {
         if (fragment != null)
         {
-            addFragmentAddToBackStack(fragmentManager, layout, fragment, fragment.getClass()
-                                                                                 .getName());
+            addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
+                                                                                         .getName());
         }
     }
 
-    public static <FM, F> void addFragmentAddToBackStack(FM fragmentManager, int layout, F fragment, String tag)
+    public static <FM, F> void addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, String tag)
     {
-        addFragmentAddToBackStack(fragmentManager, layout, fragment, tag, -1, -1, -1, -1);
+        addFragmentAddToBackStack(method, fragmentManager, layout, fragment, tag, -1, -1, -1, -1);
     }
 
-    public static <FM, F> void addFragmentAddToBackStack(FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2)
+    public static <FM, F> void addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2)
     {
         if (fragment != null)
         {
-            addFragmentAddToBackStack(fragmentManager, layout, fragment, fragment.getClass()
-                                                                                 .getName(), enter1, exit1, enter2, exit2);
+            addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
+                                                                                         .getName(), enter1, exit1, enter2, exit2);
         }
     }
 
-    public static <FM, F> void addFragmentAddToBackStack(FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2)
+    public static <FM, F> void addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2)
     {
-        addFragmentAddToBackStack(fragmentManager, layout, fragment, tag, enter1, exit1, enter2, exit2, true);
+        addFragmentAddToBackStack(method, fragmentManager, layout, fragment, tag, enter1, exit1, enter2, exit2, true);
     }
 
-    public static <FM, F> void addFragmentAddToBackStack(FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
+    public static <FM, F> void addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
     {
         if (fragment != null)
         {
-            addFragmentAddToBackStack(fragmentManager, layout, fragment, fragment.getClass()
-                                                                                 .getName(), enter1, exit1, enter2, exit2, true);
+            addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
+                                                                                         .getName(), enter1, exit1, enter2, exit2, true);
         }
     }
 
-    public static <FM, F> void addFragmentAddToBackStack(FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
+    public static <FM, F> void addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
     {
-        addFragment(fragmentManager, layout, fragment, tag, enter1, exit1, enter2, exit2, isCheckTag, true);
+        addFragment(method, fragmentManager, layout, fragment, tag, enter1, exit1, enter2, exit2, isCheckTag, true);
     }
 
-    public static <FM, F> void addFragment(FM fragmentManager, int layout, F fragment)
+    public static <FM, F> void addFragment(Method method, FM fragmentManager, int layout, F fragment)
     {
-        addFragment(fragmentManager, layout, fragment, -1, -1, -1, -1);
+        addFragment(method, fragmentManager, layout, fragment, -1, -1, -1, -1);
     }
 
-    public static <FM, F> void addFragment(FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2)
+    public static <FM, F> void addFragment(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2)
     {
         if (fragment != null)
         {
-            addFragment(fragmentManager, layout, fragment, fragment.getClass()
-                                                                   .getName(), enter1, exit1, enter2, exit2, false, false);
+            addFragment(method, fragmentManager, layout, fragment, fragment.getClass()
+                                                                           .getName(), enter1, exit1, enter2, exit2, false, false);
         }
     }
 
-    public static <FM, F> void addFragment(FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
+    public static <FM, F> void addFragment(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
     {
         if (fragmentManager != null && fragment != null)
         {
@@ -88,7 +93,15 @@ public class FragmentTool
                         fragmentTransaction.setCustomAnimations(enter1, exit1, enter2, exit2);
                     }
 
-                    fragmentTransaction.add(layout, ((Fragment) fragment), tag);
+                    switch (method)
+                    {
+                        case ADD:
+                            fragmentTransaction.add(layout, ((Fragment) fragment), tag);
+                            break;
+                        case REPLACE:
+                            fragmentTransaction.replace(layout, ((Fragment) fragment), tag);
+                            break;
+                    }
                     if (isAddToBackStack)
                     {
                         fragmentTransaction.addToBackStack(tag);
@@ -110,7 +123,15 @@ public class FragmentTool
                         fragmentTransaction.setCustomAnimations(enter1, exit1, enter2, exit2);
                     }
 
-                    fragmentTransaction.add(layout, ((android.support.v4.app.Fragment) fragment), tag);
+                    switch (method)
+                    {
+                        case ADD:
+                            fragmentTransaction.add(layout, ((android.support.v4.app.Fragment) fragment), tag);
+                            break;
+                        case REPLACE:
+                            fragmentTransaction.replace(layout, ((android.support.v4.app.Fragment) fragment), tag);
+                            break;
+                    }
                     if (isAddToBackStack)
                     {
                         fragmentTransaction.addToBackStack(tag);
