@@ -75,12 +75,22 @@ public class FragmentTool
 
     public static <FM, F> void addFragment(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
     {
+        addFragment(method, fragmentManager, layout, fragment, tag, null, enter1, exit1, enter2, exit2, isCheckTag, isAddToBackStack);
+    }
+
+    public static <FM, F> void addFragment(Method method, FM fragmentManager, int layout, F fragment, String tag, F lastFragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
+    {
         if (fragmentManager != null && fragment != null)
         {
             if (JAVATool.isStringEmpty(tag))
             {
                 tag = fragment.getClass()
                               .getName();
+            }
+
+            if (lastFragment == null)
+            {
+                lastFragment = getLastFragmentFromBackEntry(fragmentManager);
             }
 
             if (!isCheckTag || !isFragmentExistByTag(fragmentManager, tag))
@@ -107,10 +117,9 @@ public class FragmentTool
                         fragmentTransaction.addToBackStack(tag);
                     }
 
-                    final Fragment lastFragment = getLastFragmentFromBackEntry(fragmentManager);
                     if (lastFragment != null)
                     {
-                        fragmentTransaction.hide(lastFragment);
+                        fragmentTransaction.hide((Fragment) lastFragment);
                     }
 
                     fragmentTransaction.commitAllowingStateLoss();
@@ -137,10 +146,9 @@ public class FragmentTool
                         fragmentTransaction.addToBackStack(tag);
                     }
 
-                    final android.support.v4.app.Fragment lastFragment = getLastFragmentFromBackEntry(fragmentManager);
                     if (lastFragment != null)
                     {
-                        fragmentTransaction.hide(lastFragment);
+                        fragmentTransaction.hide((android.support.v4.app.Fragment) lastFragment);
                     }
 
                     fragmentTransaction.commitAllowingStateLoss();
