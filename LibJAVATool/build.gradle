@@ -11,16 +11,16 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.jakewharton.butterknife'
 
-def version = "2017.01.10.2"
+def version = "1.0.0"
 
 android {
 	compileSdkVersion 25
 	buildToolsVersion "25.0.1"
 	defaultConfig {
-		minSdkVersion 16
+		minSdkVersion 10
 		targetSdkVersion 25
 		versionCode 1
-		versionName "1.0"
+		versionName version
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}
 	buildTypes {

@@ -2,6 +2,7 @@ package tw.com.tp6gl4cj86.java_tool.Tool;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 
 /**
  * Created by tp6gl4cj86 on 2017/1/6.
@@ -9,6 +10,20 @@ import android.content.SharedPreferences;
 
 public class JAVATool
 {
+
+    public static String getVersionName(Context context)
+    {
+        try
+        {
+            return context.getPackageManager()
+                          .getPackageInfo(context.getPackageName(), 0).versionName;
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
 
     /*
@@ -44,5 +59,6 @@ public class JAVATool
     {
         return getRecord(context).edit();
     }
+
 
 }
