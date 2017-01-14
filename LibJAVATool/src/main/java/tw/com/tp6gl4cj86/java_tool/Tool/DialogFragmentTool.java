@@ -1,4 +1,4 @@
-package tw.com.tp6gl4cj86.java_tool.Fragment.Dialog;
+package tw.com.tp6gl4cj86.java_tool.Tool;
 
 import android.app.DialogFragment;
 import android.os.Build;
@@ -29,7 +29,7 @@ public class DialogFragmentTool
      * with status bar
      * onCreate
      */
-    public static void setFullScreenDialogFragment(DialogFragment dialog)
+    public static void setFullScreen(DialogFragment dialog)
     {
         if (dialog != null)
         {
@@ -41,7 +41,7 @@ public class DialogFragmentTool
      * without status bar
      * onCreate
      */
-    public static void setFullWindowScreenDialogFragment(DialogFragment dialog)
+    public static void setFullWindowScreen(DialogFragment dialog)
     {
         if (dialog != null)
         {
@@ -63,7 +63,7 @@ public class DialogFragmentTool
     /**
      * onCreateView
      */
-    public static void setDialogFragmentStatusBarColor(DialogFragment dialog, int color)
+    public static void setStatusBarColor(DialogFragment dialog, int color)
     {
         setStatusBarColor(dialog.getDialog()
                                 .getWindow(), color);
@@ -82,12 +82,12 @@ public class DialogFragmentTool
     /**
      * onCreateView
      */
-    public static void setDialogFragmentBehindStatusBar(DialogFragment dialog)
+    public static void setBehindStatusBar(DialogFragment dialog)
     {
-        setDialogFragmentBehindStatusBar(dialog, 0x00000000);
+        setBehindStatusBar(dialog, 0x00000000);
     }
 
-    public static void setDialogFragmentBehindStatusBar(DialogFragment dialog, int color)
+    public static void setBehindStatusBar(DialogFragment dialog, int color)
     {
         setBehindStatusBar(dialog.getDialog()
                                  .getWindow(), color);
@@ -108,6 +108,37 @@ public class DialogFragmentTool
         {
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+    }
+
+
+    /*
+    ##    ##   ########   ##    ##   ########    #######      ###     ########   ########
+    ##   ##    ##          ##  ##    ##     ##  ##     ##    ## ##    ##     ##  ##     ##
+    ##  ##     ##           ####     ##     ##  ##     ##   ##   ##   ##     ##  ##     ##
+    #####      ######        ##      ########   ##     ##  ##     ##  ########   ##     ##
+    ##  ##     ##            ##      ##     ##  ##     ##  #########  ##   ##    ##     ##
+    ##   ##    ##            ##      ##     ##  ##     ##  ##     ##  ##    ##   ##     ##
+    ##    ##   ########      ##      ########    #######   ##     ##  ##     ##  ########
+    */
+
+    /**
+     * onCreateView
+     */
+    public static void setKeyBoardResize(DialogFragment dialog)
+    {
+        dialog.getDialog()
+              .getWindow()
+              .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+    }
+
+    /**
+     * onCreateView
+     */
+    public static void setKeyBoardPan(DialogFragment dialog)
+    {
+        dialog.getDialog()
+              .getWindow()
+              .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
 }
