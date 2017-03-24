@@ -93,7 +93,7 @@ public class DialogFragmentTool
                                  .getWindow(), color);
     }
 
-    private static void setBehindStatusBar(Window window, int color)
+    public static void setBehindStatusBar(Window window, int color)
     {
         if (Build.VERSION.SDK_INT >= 16)
         {
