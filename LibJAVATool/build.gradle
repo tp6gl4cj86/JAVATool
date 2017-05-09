@@ -8,8 +8,8 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
-apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.jakewharton.butterknife'
 
 def version = "1.0.6"
 
@@ -43,19 +43,19 @@ dependencies {
 	annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 
-publish {
-	userOrg = 'tp6gl4cj86'
-	groupId = 'tw.com.tp6gl4cj86'
-	artifactId = 'javatool'
-	publishVersion = version
-	desc = 'JAVATool'
-	website = 'https://github.com/tp6gl4cj86/JAVATool'
-}
-
-ext {
-	PUBLISH_GROUP_ID = 'tw.com.tp6gl4cj86'
-	PUBLISH_ARTIFACT_ID = 'javatool'
-	PUBLISH_VERSION = version
-}
-
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+//publish {
+//	userOrg = 'tp6gl4cj86'
+//	groupId = 'tw.com.tp6gl4cj86'
+//	artifactId = 'javatool'
+//	publishVersion = version
+//	desc = 'JAVATool'
+//	website = 'https://github.com/tp6gl4cj86/JAVATool'
+//}
+//
+//ext {
+//	PUBLISH_GROUP_ID = 'tw.com.tp6gl4cj86'
+//	PUBLISH_ARTIFACT_ID = 'javatool'
+//	PUBLISH_VERSION = version
+//}
+//
+//apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
