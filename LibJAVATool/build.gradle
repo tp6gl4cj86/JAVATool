@@ -11,7 +11,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.jakewharton.butterknife'
 
-def version = "1.0.7"
+def version = "1.0.8"
 
 android {
 	compileSdkVersion 25
@@ -39,8 +39,8 @@ dependencies {
 	compile 'com.android.support:appcompat-v7:25.3.1'
 	compile 'com.android.support:recyclerview-v7:25.3.1'
 	compile 'com.facebook.rebound:rebound:0.3.8'
-	compile 'com.jakewharton:butterknife:8.4.0'
-	annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+	compile 'com.jakewharton:butterknife:8.8.1'
+	annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
 
 publish {
