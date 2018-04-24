@@ -127,7 +127,7 @@ public class DatePickerDialog extends OlisDialogFragment implements android.app.
                                                              {
                                                                  if (mOnDateSetListener != null)
                                                                  {
-                                                                     mOnDateSetListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth() + 1, datePicker.getDayOfMonth(), new DecimalFormat("0000").format(year) + "-" + new DecimalFormat("00").format(month) + "-" + new DecimalFormat("00").format(day));
+                                                                     mOnDateSetListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth() + 1, datePicker.getDayOfMonth(), new DecimalFormat("0000").format(datePicker.getYear()) + "-" + new DecimalFormat("00").format(datePicker.getMonth() + 1) + "-" + new DecimalFormat("00").format(datePicker.getDayOfMonth()));
                                                                  }
                                                              }
                                                          })
