@@ -45,6 +45,25 @@ public class OlisDialogFragment extends DialogFragment
         void onKeyBack();
     }
 
+    public class DialogListenerAdapter implements DialogListener
+    {
+
+        @Override
+        public void initSpring() {}
+
+        @Override
+        public void onSpringUpdate(Spring spring) {}
+
+        @Override
+        public void onSpringEndStateChange(Spring spring) {}
+
+        @Override
+        public void onSpringAtRest(Spring spring) {}
+
+        @Override
+        public void onKeyBack() {}
+    }
+
 
     protected void setSpringConfig(double qcTension, double qcFriction)
     {
@@ -86,7 +105,7 @@ public class OlisDialogFragment extends DialogFragment
 
     public boolean isAlive()
     {
-        return !isDestroy;
+        return isAdded() && !isDestroy;
     }
 
     @Override
@@ -122,12 +141,9 @@ public class OlisDialogFragment extends DialogFragment
                                         @Override
                                         public void onSpringUpdate(Spring spring)
                                         {
-                                            if (isAlive())
+                                            if (isAlive() && mDialogListener != null)
                                             {
-                                                if (mDialogListener != null)
-                                                {
-                                                    mDialogListener.onSpringUpdate(spring);
-                                                }
+                                                mDialogListener.onSpringUpdate(spring);
                                             }
                                         }
 
@@ -135,12 +151,9 @@ public class OlisDialogFragment extends DialogFragment
                                         public void onSpringEndStateChange(Spring spring)
                                         {
                                             super.onSpringEndStateChange(spring);
-                                            if (isAlive())
+                                            if (isAlive() && mDialogListener != null)
                                             {
-                                                if (mDialogListener != null)
-                                                {
-                                                    mDialogListener.onSpringEndStateChange(spring);
-                                                }
+                                                mDialogListener.onSpringEndStateChange(spring);
                                             }
                                         }
 
@@ -208,6 +221,7 @@ public class OlisDialogFragment extends DialogFragment
         {
             if (mDialogSpring != null && mDialogSpring.getEndValue() != 0)
             {
+                mDialogSpring.setCurrentValue(mDialogSpring.getCurrentValue() + 0.01f);
                 mDialogSpring.setOvershootClampingEnabled(true);
                 mDialogSpring.setEndValue(0);
             }
