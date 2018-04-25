@@ -12,6 +12,6 @@ Add dependency.
 
 ```
 dependencies {
-    compile 'tw.com.tp6gl4cj86:javatool:3.0.2'
+    compile 'tw.com.tp6gl4cj86:javatool:3.0.5'
 }
 ```
