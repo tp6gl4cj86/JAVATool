@@ -40,7 +40,7 @@ public class FragmentTool
     public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
     {
         return addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
-                                                                                     .getName(), enter1, exit1, enter2, exit2, true);
+                                                                                            .getName(), enter1, exit1, enter2, exit2, true);
     }
 
     public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
@@ -56,7 +56,7 @@ public class FragmentTool
     public static <FM, F> boolean addFragment(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2)
     {
         return addFragment(method, fragmentManager, layout, fragment, fragment.getClass()
-                                                                       .getName(), enter1, exit1, enter2, exit2, false, false);
+                                                                              .getName(), enter1, exit1, enter2, exit2, false, false);
     }
 
     public static <FM, F> boolean addFragment(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)

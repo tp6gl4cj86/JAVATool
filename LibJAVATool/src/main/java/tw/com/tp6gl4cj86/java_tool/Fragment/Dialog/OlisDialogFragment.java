@@ -1,10 +1,11 @@
 package tw.com.tp6gl4cj86.java_tool.Fragment.Dialog;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.facebook.rebound.SimpleSpringListener;
 import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringSystem;
+
+import tw.com.tp6gl4cj86.java_tool.Tool.FragmentTool;
 
 /**
  * Created by tp6gl4cj86 on 15/1/16.<p/>
@@ -195,11 +198,13 @@ public class OlisDialogFragment extends DialogFragment
     {
         try
         {
-            if (activity.getFragmentManager()
-                        .findFragmentByTag(tag) == null)
+            if (activity instanceof FragmentActivity)
             {
-                show(activity.getFragmentManager()
-                             .beginTransaction(), tag);
+                if (!FragmentTool.isFragmentExistByTag(((FragmentActivity) activity).getSupportFragmentManager(), tag))
+                {
+                    show(((FragmentActivity) activity).getSupportFragmentManager()
+                                                      .beginTransaction(), tag);
+                }
             }
         }
         catch (Exception e)
