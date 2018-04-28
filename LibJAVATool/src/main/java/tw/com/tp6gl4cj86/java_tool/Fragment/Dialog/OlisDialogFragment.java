@@ -194,6 +194,11 @@ public class OlisDialogFragment extends DialogFragment
     }
 
 
+    public void show(Activity activity)
+    {
+        show(activity, getClass().getName());
+    }
+
     public void show(Activity activity, String tag)
     {
         try
