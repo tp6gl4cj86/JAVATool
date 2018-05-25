@@ -1,5 +1,6 @@
 package tw.com.tp6gl4cj86.java_tool.Tool;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -29,6 +30,22 @@ public class GlobalTimeTool
         mSimpleDateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
 
         return mSimpleDateFormat.format(new Date());
+    }
+
+    public static Date getGlobalTimeDate()
+    {
+        mSimpleDateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
+
+        Date date = null;
+        try
+        {
+            date = mSimpleDateFormat.parse(mSimpleDateFormat.format(new Date()));
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 }
