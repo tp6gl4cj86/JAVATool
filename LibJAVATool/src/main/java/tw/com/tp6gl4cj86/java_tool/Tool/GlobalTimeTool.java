@@ -3,6 +3,7 @@ package tw.com.tp6gl4cj86.java_tool.Tool;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -10,7 +11,7 @@ import java.util.TimeZone;
  */
 public class GlobalTimeTool
 {
-    private static final SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN);
 
     private static String timeZone = "GMT+8:00";
 

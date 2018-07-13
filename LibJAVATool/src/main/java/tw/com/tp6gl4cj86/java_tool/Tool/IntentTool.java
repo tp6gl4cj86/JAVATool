@@ -67,7 +67,15 @@ public class IntentTool
 
     public static boolean isCanCall(Activity activity)
     {
-        return ((TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
+        if (activity != null)
+        {
+            final TelephonyManager mTelephonyManager = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
+            return mTelephonyManager != null && mTelephonyManager.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static void intentToSMS(Activity activity, String Phone_Number, String SMS)

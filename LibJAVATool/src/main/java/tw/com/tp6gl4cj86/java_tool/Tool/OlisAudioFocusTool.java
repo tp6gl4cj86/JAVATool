@@ -24,13 +24,19 @@ public class OlisAudioFocusTool
         OlisAudioFocusTool.onAudioFocusChangeListener = onAudioFocusChangeListener;
 
         final AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
-        audioManager.requestAudioFocus(listener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+        if (audioManager != null)
+        {
+            audioManager.requestAudioFocus(listener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+        }
     }
 
     public static void abandonAudioFocus(Activity activity)
     {
         final AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
-        audioManager.abandonAudioFocus(listener);
+        if (audioManager != null)
+        {
+            audioManager.abandonAudioFocus(listener);
+        }
     }
 
     private final static AudioManager.OnAudioFocusChangeListener listener = new AudioManager.OnAudioFocusChangeListener()

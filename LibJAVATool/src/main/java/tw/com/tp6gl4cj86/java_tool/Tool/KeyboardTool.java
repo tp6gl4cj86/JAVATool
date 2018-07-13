@@ -61,7 +61,10 @@ public class KeyboardTool
             final InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             if (view != null)
             {
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                if (imm != null)
+                {
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
             }
         }
         catch (Exception e)
@@ -75,7 +78,10 @@ public class KeyboardTool
         try
         {
             final InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+            if (imm != null)
+            {
+                imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+            }
         }
         catch (Exception e)
         {

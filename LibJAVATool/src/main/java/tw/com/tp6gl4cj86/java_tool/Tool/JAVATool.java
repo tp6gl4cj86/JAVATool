@@ -19,14 +19,17 @@ public class JAVATool
 
     public static String getVersionName(Context context)
     {
-        try
+        if (context != null)
         {
-            return context.getPackageManager()
-                          .getPackageInfo(context.getPackageName(), 0).versionName;
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
-            e.printStackTrace();
+            try
+            {
+                return context.getPackageManager()
+                              .getPackageInfo(context.getPackageName(), 0).versionName;
+            }
+            catch (PackageManager.NameNotFoundException e)
+            {
+                e.printStackTrace();
+            }
         }
         return "";
     }
@@ -49,9 +52,12 @@ public class JAVATool
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     public static void copyText(Activity activity, String label, String text, String showHint)
     {
-        ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText(label, text);
-        clipboard.setPrimaryClip(clip);
+        final ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+        final ClipData clip = ClipData.newPlainText(label, text);
+        if (clipboard != null)
+        {
+            clipboard.setPrimaryClip(clip);
+        }
 
         Toast.makeText(activity, showHint, Toast.LENGTH_SHORT)
              .show();

@@ -1,5 +1,6 @@
 package tw.com.tp6gl4cj86.java_tool.View;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -29,6 +30,7 @@ public class DisableSwipeViewPager extends ViewPager
         return false;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {

@@ -11,7 +11,10 @@ public class ActivityTool
 
     public static void setStatusBarColor(Activity activity, int color)
     {
-        DialogFragmentTool.setStatusBarColor(activity.getWindow(), color);
+        if (activity != null)
+        {
+            DialogFragmentTool.setStatusBarColor(activity.getWindow(), color);
+        }
     }
 
     public static void setBehindStatusBar(Activity activity)
@@ -21,7 +24,10 @@ public class ActivityTool
 
     public static void setBehindStatusBar(Activity activity, int color)
     {
-        DialogFragmentTool.setBehindStatusBar(activity.getWindow(), color);
+        if (activity != null)
+        {
+            DialogFragmentTool.setBehindStatusBar(activity.getWindow(), color);
+        }
     }
 
 }
