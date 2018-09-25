@@ -11,11 +11,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.jakewharton.butterknife'
 
-def version = "3.1.1"
+def version = "3.1.2"
 
 android {
 	compileSdkVersion 27
-	buildToolsVersion "27.0.3"
 	defaultConfig {
 		minSdkVersion 14
 		targetSdkVersion 27

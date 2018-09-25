@@ -15,6 +15,19 @@ public class FragmentTool
         ADD, REPLACE
     }
 
+    private static boolean isHideLast = true;
+
+    public static void enableHideLast()
+    {
+        isHideLast = true;
+    }
+
+    public static void disableHideLast()
+    {
+        isHideLast = false;
+    }
+
+
     public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment)
     {
         return addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
@@ -105,7 +118,7 @@ public class FragmentTool
                         fragmentTransaction.addToBackStack(tag);
                     }
 
-                    if (lastFragment != null)
+                    if (lastFragment != null && isHideLast)
                     {
                         fragmentTransaction.hide((Fragment) lastFragment);
                     }
@@ -135,7 +148,7 @@ public class FragmentTool
                         fragmentTransaction.addToBackStack(tag);
                     }
 
-                    if (lastFragment != null)
+                    if (lastFragment != null && isHideLast)
                     {
                         fragmentTransaction.hide((android.support.v4.app.Fragment) lastFragment);
                     }
@@ -188,9 +201,16 @@ public class FragmentTool
         return null;
     }
 
-    public static void clearFragmentManagerBackStack(FragmentManager mFragmentManager)
+    public static <FM> void clearFragmentManagerBackStack(FM mFragmentManager)
     {
-        mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        if (mFragmentManager instanceof FragmentManager)
+        {
+            ((FragmentManager) mFragmentManager).popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+        else if (mFragmentManager instanceof android.support.v4.app.FragmentManager)
+        {
+            ((android.support.v4.app.FragmentManager) mFragmentManager).popBackStack(null, android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 
 }
