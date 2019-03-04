@@ -1,8 +1,9 @@
 package tw.com.tp6gl4cj86.java_tool.Tool;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Created by tp6gl4cj86 on 2016/3/15.
@@ -28,56 +29,56 @@ public class FragmentTool
     }
 
 
-    public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment)
+    public static boolean addFragmentAddToBackStack(Method method, FragmentManager fragmentManager, int layout, Fragment fragment)
     {
         return addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
                                                                                             .getName());
     }
 
-    public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, String tag)
+    public static boolean addFragmentAddToBackStack(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, String tag)
     {
         return addFragmentAddToBackStack(method, fragmentManager, layout, fragment, tag, -1, -1, -1, -1);
     }
 
-    public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2)
+    public static boolean addFragmentAddToBackStack(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, int enter1, int exit1, int enter2, int exit2)
     {
         return addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
                                                                                             .getName(), enter1, exit1, enter2, exit2);
     }
 
-    public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2)
+    public static boolean addFragmentAddToBackStack(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, String tag, int enter1, int exit1, int enter2, int exit2)
     {
         return addFragmentAddToBackStack(method, fragmentManager, layout, fragment, tag, enter1, exit1, enter2, exit2, true);
     }
 
-    public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
+    public static boolean addFragmentAddToBackStack(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
     {
         return addFragmentAddToBackStack(method, fragmentManager, layout, fragment, fragment.getClass()
                                                                                             .getName(), enter1, exit1, enter2, exit2, isCheckTag);
     }
 
-    public static <FM, F> boolean addFragmentAddToBackStack(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
+    public static boolean addFragmentAddToBackStack(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag)
     {
         return addFragment(method, fragmentManager, layout, fragment, tag, enter1, exit1, enter2, exit2, isCheckTag, true);
     }
 
-    public static <FM, F> boolean addFragment(Method method, FM fragmentManager, int layout, F fragment)
+    public static boolean addFragment(Method method, FragmentManager fragmentManager, int layout, Fragment fragment)
     {
         return addFragment(method, fragmentManager, layout, fragment, -1, -1, -1, -1);
     }
 
-    public static <FM, F> boolean addFragment(Method method, FM fragmentManager, int layout, F fragment, int enter1, int exit1, int enter2, int exit2)
+    public static boolean addFragment(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, int enter1, int exit1, int enter2, int exit2)
     {
         return addFragment(method, fragmentManager, layout, fragment, fragment.getClass()
                                                                               .getName(), enter1, exit1, enter2, exit2, false, false);
     }
 
-    public static <FM, F> boolean addFragment(Method method, FM fragmentManager, int layout, F fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
+    public static boolean addFragment(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, String tag, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
     {
         return addFragment(method, fragmentManager, layout, fragment, tag, null, enter1, exit1, enter2, exit2, isCheckTag, isAddToBackStack);
     }
 
-    public static <FM, F> boolean addFragment(Method method, FM fragmentManager, int layout, F fragment, String tag, F lastFragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
+    public static boolean addFragment(Method method, FragmentManager fragmentManager, int layout, Fragment fragment, String tag, Fragment lastFragment, int enter1, int exit1, int enter2, int exit2, boolean isCheckTag, boolean isAddToBackStack)
     {
         boolean isSuccess = false;
 
@@ -96,120 +97,70 @@ public class FragmentTool
 
             if (!isCheckTag || !isFragmentExistByTag(fragmentManager, tag))
             {
-                if (fragmentManager instanceof FragmentManager)
+                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                if (enter1 >= 0 && exit1 >= 0 && enter2 >= 0 && exit2 >= 0)
                 {
-                    final FragmentTransaction fragmentTransaction = ((FragmentManager) fragmentManager).beginTransaction();
-                    if (enter1 >= 0 && exit1 >= 0 && enter2 >= 0 && exit2 >= 0)
-                    {
-                        fragmentTransaction.setCustomAnimations(enter1, exit1, enter2, exit2);
-                    }
-
-                    switch (method)
-                    {
-                        case ADD:
-                            fragmentTransaction.add(layout, ((Fragment) fragment), tag);
-                            break;
-                        case REPLACE:
-                            fragmentTransaction.replace(layout, ((Fragment) fragment), tag);
-                            break;
-                    }
-                    if (isAddToBackStack)
-                    {
-                        fragmentTransaction.addToBackStack(tag);
-                    }
-
-                    if (lastFragment != null && isHideLast)
-                    {
-                        fragmentTransaction.hide((Fragment) lastFragment);
-                    }
-
-                    fragmentTransaction.commitAllowingStateLoss();
-                    isSuccess = true;
+                    fragmentTransaction.setCustomAnimations(enter1, exit1, enter2, exit2);
                 }
-                else if (fragmentManager instanceof android.support.v4.app.FragmentManager)
+
+                switch (method)
                 {
-                    final android.support.v4.app.FragmentTransaction fragmentTransaction = ((android.support.v4.app.FragmentManager) fragmentManager).beginTransaction();
-                    if (enter1 >= 0 && exit1 >= 0 && enter2 >= 0 && exit2 >= 0)
-                    {
-                        fragmentTransaction.setCustomAnimations(enter1, exit1, enter2, exit2);
-                    }
-
-                    switch (method)
-                    {
-                        case ADD:
-                            fragmentTransaction.add(layout, ((android.support.v4.app.Fragment) fragment), tag);
-                            break;
-                        case REPLACE:
-                            fragmentTransaction.replace(layout, ((android.support.v4.app.Fragment) fragment), tag);
-                            break;
-                    }
-                    if (isAddToBackStack)
-                    {
-                        fragmentTransaction.addToBackStack(tag);
-                    }
-
-                    if (lastFragment != null && isHideLast)
-                    {
-                        fragmentTransaction.hide((android.support.v4.app.Fragment) lastFragment);
-                    }
-
-                    fragmentTransaction.commitAllowingStateLoss();
-                    isSuccess = true;
+                    case ADD:
+                        fragmentTransaction.add(layout, fragment, tag);
+                        break;
+                    case REPLACE:
+                        fragmentTransaction.replace(layout, fragment, tag);
+                        break;
                 }
+                if (isAddToBackStack)
+                {
+                    fragmentTransaction.addToBackStack(tag);
+                }
+
+                if (lastFragment != null && isHideLast)
+                {
+                    fragmentTransaction.hide(lastFragment);
+                }
+
+                fragmentTransaction.commitAllowingStateLoss();
+                isSuccess = true;
             }
         }
 
         return isSuccess;
     }
 
-    public static <FM> boolean isFragmentExistByTag(FM fragmentManager, String tag)
+    public static boolean isFragmentExistByTag(FragmentManager fragmentManager, String tag)
     {
-        if (fragmentManager instanceof FragmentManager)
+        if (fragmentManager != null)
         {
-            return ((FragmentManager) fragmentManager).findFragmentByTag(tag) != null;
-        }
-        else if (fragmentManager instanceof android.support.v4.app.FragmentManager)
-        {
-            return ((android.support.v4.app.FragmentManager) fragmentManager).findFragmentByTag(tag) != null;
+            return fragmentManager.findFragmentByTag(tag) != null;
         }
         return false;
     }
 
-    public static <FM, F> F getLastFragmentFromBackEntry(FM fragmentManager)
+    public static Fragment getLastFragmentFromBackEntry(FragmentManager fragmentManager)
     {
         final int position;
 
-        if (fragmentManager instanceof FragmentManager)
+        if (fragmentManager != null)
         {
-            position = ((FragmentManager) fragmentManager).getBackStackEntryCount() - 1;
+            position = fragmentManager.getBackStackEntryCount() - 1;
             if (position >= 0)
             {
-                final FragmentManager.BackStackEntry backStackEntry = ((FragmentManager) fragmentManager).getBackStackEntryAt(position);
-                return (F) ((FragmentManager) fragmentManager).findFragmentByTag(backStackEntry.getName());
-            }
-        }
-        else if (fragmentManager instanceof android.support.v4.app.FragmentManager)
-        {
-            position = ((android.support.v4.app.FragmentManager) fragmentManager).getBackStackEntryCount() - 1;
-            if (position >= 0)
-            {
-                final android.support.v4.app.FragmentManager.BackStackEntry backStackEntry = ((android.support.v4.app.FragmentManager) fragmentManager).getBackStackEntryAt(position);
-                return (F) ((android.support.v4.app.FragmentManager) fragmentManager).findFragmentByTag(backStackEntry.getName());
+                final FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(position);
+                return fragmentManager.findFragmentByTag(backStackEntry.getName());
             }
         }
 
         return null;
     }
 
-    public static <FM> void clearFragmentManagerBackStack(FM mFragmentManager)
+    public static void clearFragmentManagerBackStack(FragmentManager mFragmentManager)
     {
-        if (mFragmentManager instanceof FragmentManager)
+        if (mFragmentManager != null)
         {
-            ((FragmentManager) mFragmentManager).popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-        else if (mFragmentManager instanceof android.support.v4.app.FragmentManager)
-        {
-            ((android.support.v4.app.FragmentManager) mFragmentManager).popBackStack(null, android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
 

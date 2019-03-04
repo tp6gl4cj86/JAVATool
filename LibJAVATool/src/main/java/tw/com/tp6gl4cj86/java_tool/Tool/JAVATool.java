@@ -7,8 +7,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * Created by tp6gl4cj86 on 2017/1/6.

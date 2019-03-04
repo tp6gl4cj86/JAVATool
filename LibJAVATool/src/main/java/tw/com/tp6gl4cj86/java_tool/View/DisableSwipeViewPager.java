@@ -2,9 +2,10 @@ package tw.com.tp6gl4cj86.java_tool.View;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by tp6gl4cj86 on 15/3/6.

@@ -4,7 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.RequiresPermission;
+
+import androidx.annotation.RequiresPermission;
 
 /**
  * Created by tp6gl4cj86 on 2014/12/11.
