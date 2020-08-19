@@ -13,7 +13,8 @@ public class FragmentTool
 
     public static enum Method
     {
-        ADD, REPLACE
+        ADD,
+        REPLACE
     }
 
     private static boolean isHideLast = true;
@@ -117,12 +118,15 @@ public class FragmentTool
                     fragmentTransaction.addToBackStack(tag);
                 }
 
+                fragmentTransaction.commitAllowingStateLoss();
+
                 if (lastFragment != null && isHideLast)
                 {
-                    fragmentTransaction.hide(lastFragment);
+                    final FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+                    fragmentTransaction2.hide(lastFragment);
+                    fragmentTransaction2.commitAllowingStateLoss();
                 }
 
-                fragmentTransaction.commitAllowingStateLoss();
                 isSuccess = true;
             }
         }
