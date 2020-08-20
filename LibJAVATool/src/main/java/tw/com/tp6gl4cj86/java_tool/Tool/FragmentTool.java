@@ -118,14 +118,12 @@ public class FragmentTool
                     fragmentTransaction.addToBackStack(tag);
                 }
 
-                fragmentTransaction.commitAllowingStateLoss();
-
                 if (lastFragment != null && isHideLast)
                 {
-                    final FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
-                    fragmentTransaction2.hide(lastFragment);
-                    fragmentTransaction2.commitAllowingStateLoss();
+                    fragmentTransaction.hide(lastFragment);
                 }
+
+                fragmentTransaction.commitAllowingStateLoss();
 
                 isSuccess = true;
             }

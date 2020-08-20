@@ -13,14 +13,14 @@ apply plugin: 'com.android.library'
 //apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.jakewharton.butterknife'
 
-def version = "4.0.1"
+def version = "4.0.3"
 
 android {
 	compileSdkVersion 29
 	defaultConfig {
 		minSdkVersion 14
 		targetSdkVersion 29
-		versionCode 3
+		versionCode 4
 		versionName version
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
