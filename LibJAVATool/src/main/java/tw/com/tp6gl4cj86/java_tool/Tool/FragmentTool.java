@@ -162,7 +162,7 @@ public class FragmentTool
     {
         if (mFragmentManager != null)
         {
-            mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            mFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
 
