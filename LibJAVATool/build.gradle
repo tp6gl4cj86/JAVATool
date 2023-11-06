@@ -10,9 +10,10 @@ buildscript {
 plugins {
 	id 'com.android.library'
 	id 'kotlin-android'
+	id 'maven-publish'
 }
 
-def version = "5.0.0"
+def versionStr = "5.0.0"
 
 android {
 	namespace = 'tw.com.tp6gl4cj86.java_tool'
@@ -22,7 +23,7 @@ android {
 		minSdk 19
 		targetSdk 33
 		versionCode 5
-		versionName version
+		versionName versionStr
 	}
 	buildTypes {
 		release {
@@ -49,4 +50,23 @@ dependencies {
 	api 'androidx.recyclerview:recyclerview:1.3.2'
 	api 'com.facebook.rebound:rebound:0.3.8'
 	api 'com.google.code.gson:gson:2.8.9'
+}
+
+afterEvaluate {
+	publishing {
+		publications {
+			release(MavenPublication) {
+				groupId = 'tw.com.tp6gl4cj86'
+				artifactId = 'java_tool'
+				version = versionStr
+				from components.release
+			}
+		}
+//		repositories {
+//			mavenLocal()
+//		}
+//		./gradlew clean
+//		./gradlew build
+//		./gradlew publishToMavenLocal
+	}
 }
