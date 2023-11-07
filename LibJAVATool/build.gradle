@@ -56,10 +56,11 @@ afterEvaluate {
 	publishing {
 		publications {
 			release(MavenPublication) {
+				from components.release
+
 				groupId = 'tw.com.tp6gl4cj86'
 				artifactId = 'java_tool'
 				version = versionStr
-				from components.release
 			}
 		}
 //		repositories {
@@ -67,6 +68,8 @@ afterEvaluate {
 //		}
 //		./gradlew clean
 //		./gradlew build
+//		./gradlew build publishToMavenLocal
+
 //		./gradlew publishToMavenLocal
 //		./gradlew publishReleasePublicationToMavenLocal
 	}
